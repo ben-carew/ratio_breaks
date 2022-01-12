@@ -17,6 +17,7 @@ int menu();
 int displayTime(int seconds, int break_seconds);
 void statistics(int total, int accum_break, int rest, int num_breaks);
 void overTime(int accum_break);
+void mealTime();
 
 int main(int argc, char *argv[]) {
   int ratio;
@@ -64,10 +65,15 @@ int main(int argc, char *argv[]) {
       }
       break;
     case 3:
+      num_breaks++;
+      accum_break = 0;
+      mealTime();
+      break;
+    case 4:
       statistics(total, accum_break, rest, num_breaks);
       break;
     }
-    if (choice == 3) {
+    if (choice == 4) {
       break;
     }
   }
@@ -86,6 +92,7 @@ int menu() {
   printw("Work\n");
   attroff(A_STANDOUT);
   printw("Break\n");
+  printw("Meal\n");
   printw("Finish\n");
   refresh();
   while (true) {
@@ -98,6 +105,7 @@ int menu() {
         attron(A_STANDOUT);
         printw("Break\n");
         attroff(A_STANDOUT);
+        printw("Meal\n");
         printw("Finish\n");
         highlight = 2;
         break;
@@ -106,11 +114,22 @@ int menu() {
         printw("Work\n");
         printw("Break\n");
         attron(A_STANDOUT);
-        printw("Finish\n");
+        printw("Meal\n");
         attroff(A_STANDOUT);
+        printw("Finish\n");
         highlight = 3;
         break;
       } else if (highlight == 3) {
+        move(0, 0);
+        printw("Work\n");
+        printw("Break\n");
+        printw("Meal\n");
+        attron(A_STANDOUT);
+        printw("Finish\n");
+        attroff(A_STANDOUT);
+        highlight = 4;
+        break;
+      } else if (highlight == 4) {
         break;
       }
     case KEY_UP:
@@ -122,6 +141,7 @@ int menu() {
         printw("Work\n");
         attroff(A_STANDOUT);
         printw("Break\n");
+        printw("Meal\n");
         printw("Finish\n");
         highlight = 1;
         break;
@@ -131,8 +151,19 @@ int menu() {
         attron(A_STANDOUT);
         printw("Break\n");
         attroff(A_STANDOUT);
+        printw("Meal\n");
         printw("Finish\n");
         highlight = 2;
+        break;
+      } else if (highlight == 4) {
+        move(0, 0);
+        printw("Work\n");
+        printw("Break\n");
+        attron(A_STANDOUT);
+        printw("Meal\n");
+        attroff(A_STANDOUT);
+        printw("Finish\n");
+        highlight = 3;
         break;
       }
     case 10:
@@ -191,6 +222,34 @@ void overTime(int accum_break) {
     printw("Ratio Break Timer\n");
     printw("-----------------\n");
     printw("You are %d seconds over your break limit!\n", over);
+    ch = getch();
+    if (ch == 10) {
+      break;
+    }
+    refresh();
+  }
+  endwin();
+}
+
+void mealTime() {
+  int meal = 0;
+  initscr();
+  clear();
+  noecho();
+  halfdelay(10);
+  keypad(stdscr, TRUE);
+  while (true) {
+    meal++;
+    int hour, min, sec;
+    min = meal / 60;
+    sec = meal % 60;
+    hour = min / 60;
+    min = min % 60;
+    int ch;
+    move(0, 0);
+    printw("Ratio Break Timer\n");
+    printw("-----------------\n");
+    printw("You have been on a meal break for %d:%d:%d\n", hour, min, sec);
     ch = getch();
     if (ch == 10) {
       break;
