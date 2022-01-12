@@ -88,6 +88,12 @@ int menu() {
   noecho();
   cbreak();
   keypad(stdscr, TRUE);
+  attron(A_UNDERLINE);
+  attron(A_BOLD);
+  printw("Ratio Break Timer\n");
+  attroff(A_UNDERLINE);
+  attroff(A_BOLD);
+  printw("\n");
   attron(A_STANDOUT);
   printw("Work\n");
   attroff(A_STANDOUT);
@@ -101,6 +107,12 @@ int menu() {
     case KEY_DOWN:
       if (highlight == 1) {
         move(0, 0);
+        attron(A_UNDERLINE);
+        attron(A_BOLD);
+        printw("Ratio Break Timer\n");
+        attroff(A_UNDERLINE);
+        attroff(A_BOLD);
+        printw("\n");
         printw("Work\n");
         attron(A_STANDOUT);
         printw("Break\n");
@@ -111,6 +123,12 @@ int menu() {
         break;
       } else if (highlight == 2) {
         move(0, 0);
+        attron(A_UNDERLINE);
+        attron(A_BOLD);
+        printw("Ratio Break Timer\n");
+        attroff(A_UNDERLINE);
+        attroff(A_BOLD);
+        printw("\n");
         printw("Work\n");
         printw("Break\n");
         attron(A_STANDOUT);
@@ -121,6 +139,12 @@ int menu() {
         break;
       } else if (highlight == 3) {
         move(0, 0);
+        attron(A_UNDERLINE);
+        attron(A_BOLD);
+        printw("Ratio Break Timer\n");
+        attroff(A_UNDERLINE);
+        attroff(A_BOLD);
+        printw("\n");
         printw("Work\n");
         printw("Break\n");
         printw("Meal\n");
@@ -137,6 +161,12 @@ int menu() {
         break;
       } else if (highlight == 2) {
         move(0, 0);
+        attron(A_UNDERLINE);
+        attron(A_BOLD);
+        printw("Ratio Break Timer\n");
+        attroff(A_UNDERLINE);
+        attroff(A_BOLD);
+        printw("\n");
         attron(A_STANDOUT);
         printw("Work\n");
         attroff(A_STANDOUT);
@@ -147,6 +177,12 @@ int menu() {
         break;
       } else if (highlight == 3) {
         move(0, 0);
+        attron(A_UNDERLINE);
+        attron(A_BOLD);
+        printw("Ratio Break Timer\n");
+        attroff(A_UNDERLINE);
+        attroff(A_BOLD);
+        printw("\n");
         printw("Work\n");
         attron(A_STANDOUT);
         printw("Break\n");
@@ -157,6 +193,12 @@ int menu() {
         break;
       } else if (highlight == 4) {
         move(0, 0);
+        attron(A_UNDERLINE);
+        attron(A_BOLD);
+        printw("Ratio Break Timer\n");
+        attroff(A_UNDERLINE);
+        attroff(A_BOLD);
+        printw("\n");
         printw("Work\n");
         printw("Break\n");
         attron(A_STANDOUT);
@@ -187,8 +229,12 @@ int displayTime(int seconds, int break_seconds) {
   halfdelay(10);
   keypad(stdscr, TRUE);
   move(0, 0);
+  attron(A_UNDERLINE);
+  attron(A_BOLD);
   printw("Ratio Break Timer\n");
-  printw("-----------------\n");
+  attroff(A_UNDERLINE);
+  attroff(A_BOLD);
+  printw("\n");
   int hour, min, sec;
   min = seconds / 60;
   sec = seconds % 60;
@@ -200,6 +246,7 @@ int displayTime(int seconds, int break_seconds) {
   hour = min / 60;
   min = min % 60;
   printw("Accumulated Break: %d:%d:%d\n", hour, min, sec);
+  printw("\n");
   printw("Press Enter to return to Menu\n");
   refresh();
   ch = getch();
@@ -219,9 +266,15 @@ void overTime(int accum_break) {
     accum_break--;
     int over = accum_break * -1;
     move(0, 0);
+    attron(A_UNDERLINE);
+    attron(A_BOLD);
     printw("Ratio Break Timer\n");
-    printw("-----------------\n");
+    attroff(A_UNDERLINE);
+    attroff(A_BOLD);
+    printw("\n");
     printw("You are %d seconds over your break limit!\n", over);
+    printw("\n");
+    printw("Press Enter to return to Menu\n");
     ch = getch();
     if (ch == 10) {
       break;
@@ -247,9 +300,15 @@ void mealTime() {
     min = min % 60;
     int ch;
     move(0, 0);
+    attron(A_UNDERLINE);
+    attron(A_BOLD);
     printw("Ratio Break Timer\n");
-    printw("-----------------\n");
+    attroff(A_UNDERLINE);
+    attroff(A_BOLD);
+    printw("\n");
     printw("You have been on a meal break for %d:%d:%d\n", hour, min, sec);
+    printw("\n");
+    printw("Press Enter to return to Menu\n");
     ch = getch();
     if (ch == 10) {
       break;
@@ -267,8 +326,12 @@ void statistics(int total, int accum_break, int rest, int num_breaks) {
   cbreak();
   keypad(stdscr, TRUE);
   move(0, 0);
+  attron(A_UNDERLINE);
+  attron(A_BOLD);
   printw("Ratio Break Timer\n");
-  printw("-----------------\n");
+  attroff(A_UNDERLINE);
+  attroff(A_BOLD);
+  printw("\n");
   int hour, min, sec;
   min = total / 60;
   sec = total % 60;
@@ -286,7 +349,10 @@ void statistics(int total, int accum_break, int rest, int num_breaks) {
   min = min % 60;
   printw("Total Break Time: %d:%d:%d\n", hour, min, sec);
   printw("Number of Breaks Taken: %d\n", num_breaks);
-  printw("Good job!");
+  printw("\n");
+  printw("Good job!\n");
+  printw("\n");
+  printw("Press Enter to save and exit\n");
   refresh();
   getch();
   endwin();
