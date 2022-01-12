@@ -1,6 +1,7 @@
 // CPP program to run the "Rational Breaks" method of work management
 // as suggested here:
 // https://www.lesswrong.com/posts/RWu8eZqbwgB9zaerh/rational-breaks-a-better-way-to-work
+// Compile: g++ ratio_break.cpp -o ratio_break -lncurses
 
 #include <chrono>
 #include <ctime>
